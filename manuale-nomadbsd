@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Manuale d'uso di NomadBSD</title>
+<meta name="generator" content="Bluefish 2.2.12" >
+<meta name="author" content="User Borgio" >
+<meta name="date" content="2022-03-24T13:58:34+0100" >
+<meta name="copyright" content="">
+<meta name="keywords" content="">
+<meta name="description" content="Manuale di uso di NomadBSD">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1>Manuale d'uso di NomadBSD</h1>
+
+<h2>Contenuti</h2>
+
+<ol>
+<li><a href="#intro">Introduzione</a></li>
+<li><a href="#installation">Installazione</a>
+
+<ol>
+<li><a href="#choosemedia">Scegliere una chiavetta USB</a></li>
+<li><a href="#download">Download e masterizzazione dell'immagine</a></li>
+</ol></li>
+<li><a href="#firstboot">Il setup di NomadBSD</a></li>
+<li><a href="#overview">Panoramica</a></li>
+<li><a href="#keybindings">Scorciatoie da tastiera</a>
+
+<ol>
+<li><a href="#globalkeybindings">Scorciatoie generali</a></li>
+<li><a href="#terminalkeybindings">Scorciatoie del terminale</a></li>
+</ol></li>
+<li><a href="#autostart">Abilita/Disabilita componenti desktop &amp; auto-avvio dei programmi</a></li>
+<li><a href="#plank">Aggiungere applicazioni al pannello <em>plank</em></a></li>
+<li><a href="#dmconfig">Configurazione del gestore di schermo: Auto login, utente predefinito e tema</a></li>
+<li><a href="#adduser">Aggiungere un account utente preconfigurato</a></li>
+<li><a href="#filesystems">Filesystem</a>
+
+<ol>
+<li><a href="#automount">Automontaggio</a></li>
+<li><a href="#fssupport">Estendere il supporto al filesystem</a>
+
+<ol>
+<li><a href="#exfat">exFat</a></li>
+<li><a href="#linuxfs">BTRFS e XFS</a></li>
+</ol></li>
+</ol></li>
+<li><a href="#networking">Connessione</a>
+
+<ol>
+<li><a href="#wifi">Connessione Wireless</a></li>
+</ol></li>
+<li><a href="#instpkg">Installare pacchetti software</a></li>
+<li><a href="#linuxbrowser">Installare browsers Linux<sup>&reg;</sup> per <em>Netflix</em>, <em>Prime Video</em>, etc.</a></li>
+<li><a href="#graphics">Schermo</a>
+
+<ol>
+<li><a href="#multihead">Configurazione Multihead</a></li>
+<li><a href="#displaysettings">Cambiare i parametri dello schermo</a></li>
+</ol></li>
+<li><a href="#sound">Suono</a>
+
+<ol>
+<li><a href="#defaultaudio">Selezionare il dispositivo audio predefinito</a></li>
+</ol></li>
+<li><a href="#altwm">Usare un gestore alternativo delle finestre</a></li>
+<li><a href="#advanced">Argomenti avanzati</a>
+
+<ol>
+<li><a href="#reset">Ripristinare NomadBSD</a>
+
+<ol>
+<li><a href="#reset_limits">Limitazioni</a></li>
+</ol></li>
+<li><a href="#disableinitgfx">Disabilitare il setup automatico dei driver grafici</a></li>
+<li><a href="#hddinstall">Installare NomadBSD su hard disk</a></li>
+<li><a href="#vbox">Avviare NomadBSD in VirtualBox<sup>™</sup></a></li>
+<li><a href="#linuxpkg">Installare pacchetti Linux<sup>&reg;</sup></a></li>
+</ol></li>
+<li><a href="#troubleshooting">Risoluzione dei problemi</a>
+
+<ol>
+<li><a href="#errata">Errata</a></li>
+<li><a href="#ts_boot">Processo di avvio</a>
+
+<ol>
+<li><a href="#ts_mountroot">L'avvio si interrompe al prompt <em>mountroot</em></a></li>
+</ol></li>
+<li><a href="#ts_graphics">Ambiente Grafico</a>
+
+<ol>
+<li><a href="#ts_gfxdetect_crash">Il riconoscimento automatico della scheda fa collassare il sistema</a></li>
+<li><a href="#ts_ati_amd">ATI/AMD</a></li>
+<li><a href="#ts_nvidia">NVIDIA</a></li>
+<li><a href="#efifb">Framebuffer dello schermo EFI distorto/schiacciato</a></li>
+<li><a href="#hybridgfx">Combinazione grafica ibrida/commutabile</a></li>
+</ol></li>
+</ol></li>
+</ol>
+
+<p><a name="intro"></a></p>
+
+<h2>Intro</h2>
+
+<p>NomadBSD è un sistema live a 64bit per chiavette USB, basato su
+FreeBSD<sup>&reg;</sup>. Oltre al riconoscimento e configurazione automatici dell'hardware, è configurato per essere usato come un sistema desktop che funziona istantaneamente, ma può essere usato anche come recupero dati, per finalità educative o per valutare la compatibilità hardware con FreeBSD<sup>&reg;</sup>.</p>
+
+<p><a name="installation"></a></p>
+
+<h2>Installazione</h2>
+
+<p><a name="choosemedia"></a></p>
+<h3>Scegliere una chiavetta USB</h3>
+<p>NomadBSD funziona bene su chiavette USB 2.X, ma dovendo scrivere molti piccoli file, possono essere molto lente. Per migliorare le prestazioni, dovreste considerare l'uso di chiavette USB 3.X anche su porte USB 2.X, dato che tendono ad essere più veloci. Leggi
+<a href="https://www.anandtech.com/show/4523/usb-30-flash-drive-roundup/6">USB 3.0 Flash Drive Roundup</a> (in inglese). Non usate supporti economici e sconosciuti, solitamente venduti  nei supermarket. Queste sono molto lente e inaffidabili.</p>
+
+<p><a name="download"></a></p>
+<h3>Scaricare e scrivere l'immagine</h3>
+<p>Le istruzioni per scrivere l'immagine su una chiavetta da diversi sistemi operativi, possono essere ottenute <a href="http://nomadbsd.org/download.html">qui</a>.</p>
+
+<p><a name="firstboot"></a></p>
+<h2>Configurare NomadBSD</h2>
+<p>Quando avviate NomadBSD per la prima volta, si avvierà lo strumento di setup che vi permette di definire la lingua, il fuso orario, il tipo di tastiera, la password, la criptazione e le applicazioni predefinite. Il setup crea una nuova partizione per la directory <code>/data</code> che usa lo spazio rimanente nel dispositivo di stoccaggio. In base alle sue dimensioni, la creazione del filesystem può richiedere molti minuti.</p>
+
+<p><a name="overview"></a></p>
+<h2>Panoramica</h2>
+
+<p><img src="images/nomadbsd-overview.png" alt="" /></p>
+
+<ol>
+<li>Menù di <a href="https://freshports/x11-wm/openbox">Openbox</a>. Puoi aprirlo premendo sul tasto Windows<sup>&reg;</sup> (o tasto Super)/tasto ⌘ (Mac<sup>&reg;</sup>), o cliccando con il destro sull'immagine di sfondo (finestra di root).</li>
+<li><a href="https://freshports.org/sysutils/dsbbatmon">DSBBatmon</a>. Sorvolando sull'icona puoi vedere lo stato attuale di carica della batteria e il suo caricamento. Cliccandoci
+sopra compare il menù di configurazione.</li>
+<li><a href="https://freshports.org/audio/dsbmixer">DSBMixer</a>. Sorvolando sull'icona puoi vedere lo stato attuale del volume audio del canale principale. Usando la rotella del mouse su essa puoi cambiare il volume. Cliccandoci sopra si apre il menù principale di <a href="http://freshports.org/audio/dsbmixer">DSBMixer</a>.</li>
+<li><a href="https://freshports.org/sysutils/dsbmc">DSBMC</a>. Cliccando sull'icona si accede al menù principale in cui potrai vedere i dispositivi montati collegati al sistema. Usa il menù contestuale del dispositivo per selezionare una azione (monta/smonta,	apri, esegui, espelli) o doppio click per montare ed aprire il dispositivo sul gestore dei file predefinito. Puoi usare il menù delle preferenze per cambiare il gestore dei file, configurare l'autoplay e i programmi multimediali.</li>
+<li><a href="https://www.freshports.org/net-mgmt/networkmgr">NetworkMgr</a>. Cliccando sull'icona si apre il menù da cui puoi connetterti alla rete wireless.</li>
+<li>Data e orologio. Cliccando in questa area si accede al calendario.</li>
+</ol>
+
+<p><a name="keybindings"></a></p>
+<h2>Scorciatoie da tastiera</h2>
+<p><a name="globalkeybindings"></a></p>
+<h3>Scorciatoie generali</h3>
+
+<table style="width:100%; table-layout:fixed">
+	<tr>
+		<th>Tasti</th>
+		<th>Funzione</th>
+	</tr>
+	<tr>
+		<td>Alt+F2</td>
+		<td>Apre DSBExec per eseguire un comando.</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Alt+L</td>
+		<td>Blocca lo schermo.</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Space</td>
+		<td>Apre il <a href="https://www.freshports.org/x11/dmenu">dmenu-run</a>
+		per eseguire un comando.</td>
+	</tr>
+	<tr>
+		<td>Stampa</td>
+		<td>Apre il cattura-schermo di XFCE 4.</td>
+	</tr>
+</table>
+
+<p><a name="terminalkeybindings"></a></p>
+<h3>Scorciatoie del Terminale</h3>
+
+<table style="width:100%; table-layout:fixed">
+	<tr>
+		<th>Tasti</th>
+		<th>Funzione</th>
+	</tr>
+	<tr>
+		<td>Ctrl++</td>
+		<td>Aumenta la grandezza dei caratteri</td>
+	</tr>
+	<tr>
+		<td>Ctrl+-</td>
+		<td>Diminuisce la grandezza dei caratteri</td>
+	</tr>
+	<tr>
+		<td>Maiusc+Ctrl+C</td>
+		<td>Copia il testo selezionato</td>
+	</tr>
+	<tr>
+		<td>Maiusc+Ctrl+V</td>
+		<td>Incolla il testo copiato</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Maiusc+T</td>
+		<td>Apre una nuova tabella</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Maiusc+W</td>
+		<td>Chiude la tabella attuale</td>
+	</tr>
+	<tr>
+		<td>Alt+Freccia sinistra</td>
+		<td>Tabella precedente</td>
+	</tr>
+	<tr>
+		<td>Alt+Freccia destra</td>
+		<td>Tabella successiva</td>
+	</tr>
+	<tr>
+		<td>Alt+[1-9]</td>
+		<td>Passa alla tabella N (1-9)</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Maiusc+S</td>
+		<td>Attiva/disattiva la barra di scorrimento</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Maiusc+tasto sinistro del mouse</td>
+		<td>Apre un link</td>
+	</tr>
+	<tr>
+		<td>F11</td>
+		<td>Schermo pieno</td>
+	</tr>
+	<tr>
+		<td>Maiusc+PaginaSu</td>
+		<td>Scorre una pagina più in su</td>
+	</tr>
+	<tr>
+		<td>Maiusc+PaginaGiù</td>
+		<td>Scorre una pagina più in giù</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Maiusc+FrecciaSu</td>
+		<td>Scorre una riga più in sù</td>
+	</tr>
+	<tr>
+		<td>Ctrl+Maiusc+FrecciaGiù</td>
+		<td>Scorre una riga più giù</td>
+	</tr>
+</table>
+
+<p><a name="autostart"></a></p>
+<h2>Abilita/Disabilita le componenti desktop, ed i programmi all'avvio</h2>
+<p>Il programma <a href="http://freshports.org/sysutils/dsbautostart">DSBAutostart</a> (<a href="#overview">Menù di Openbox</a> &rarr; <em>Settings</em> &rarr; <em>Autostart Settings</em>) ti permette di definire quali programmi vengono eseguiti quando si avvia l'interfaccia grafica. Inoltre, ti permette di abilitare/disabilitare alcune componenti del desktop di NomadBSD. I cambiamenti saranno esecutivi dopo l'uscita e il nuovo ingresso.</p>
+
+<p><img src="images/dsbautostart-screenshot.png" alt="" />
+<a name="plank"></a></p>
+<h2>Aggiungere applicazioni al pannello <em>plank</em></h2>
+<p>Apri il gestore dei file preferito e vai a <code>/usr/local/share/applications</code>. Puoi ottenere la stessa cosa cliccando sulla scorciatoia <em>Applications</em> sul pannello laterale. Trascina e rilascia l'icona dell'applicazione sul pannello <em>plank</em>.</p>
+
+<p><a name="dmconfig"></a></p>
+<h2>Configurazione del gestore di schermo: Auto login, utente predefinito e tema</h2>
+<p>Il gestore di schermo, <a href="https://freshports.org/x11/slim">SLiM</a>, usato da NomadBSD è configurato per fare l'auto-login dell'utente predefinito <em>nomad</em>. Il programma
+<em>nomadbsd-dmconfig</em> (<a href="#overview">Menù di Openbox</a> &rarr; <em>Settings</em> &rarr; <em>Display manager settings</em>) ti permette di cambiare/disabilitare l'utente predefinito e di abilitare/disabilitare l'auto-login. Inoltre ti permette di cambiarne il tema. Se vuoi aggiungere un nuovo tema, copia la directory dei temi su <em>/usr/local/share/slim/themes/</em>. Per vederne una anteprima in <em>nomadbsd-dmconfig</em> copia uno screenshot della schermata di login su <em>/usr/local/share/slim/themes/your-theme-name/preview.png</em>.</p>
+
+<p><img src="images/nomadbsd-dmconfig-screenshot.png" alt="" />
+<a name="adduser"></a></p>
+<h2>Aggiungere un account utente preconfigurato</h2>
+<p>Se vuoi aggiungere un ulteriore account utente, usa <em>nomadbsd-adduser</em> (<a href="#overview">Menù di Openbox</a> &rarr; <em>System</em> &rarr; <em>Add user</em>).
+Poiché NomadBSD è configurato per un login automatico dell'utente <em>nomad</em>, devi cambiare questo comportamento per essere in grado di effettuare il login come altro utente. Vedi <a href="#dmconfig"><em>nomadbsd-dmconfig</em></a>.</p>
+
+<p><a name="filesystems"></a></p>
+<h2>Filesystems</h2>
+<p>NomadBSD è disponibile con numerosi filesystem pre-installati (CD9660, FAT, HFS+, NTFS, Ext2/3/4). Puoi montare dispositivi di stoccaggio attraverso <a href="http://freshports.org/sysutils/dsbmc">DSBMC</a> (vedi <a href="#overview">Panoramica</a>), che è un client grafico per <a href="http://freshports.org/sysutils/dsbmd">DSBMD</a>.
+
+<a name="automount"></a></p>
+<h3>Automontaggio</h3>
+<p>Puoi abilitare l'automontaggio in <a href="http://freshports.org/sysutils/dsbmc">DSBMC</a> sotto <em>File</em> &rarr; <em>Preferences</em> → <em>Automatically mount devices</em></p>
+<p>Alternativamente puoi usare <a href="http://freshports.org/sysutils/dsbmc">dsbmc-cli</a>: Esegui il comando <code>dsbmc-cli -a</code> per montare automaticamente tutti i dispositivi connessi e per abilitare il montaggio automatico dei dispositivi connessi successivamente al sistema. Per avviare automaticamente questo comando all'avvio del sistema, apri 
+<a href="#autostart">DSBAutostart</a> e aggiungi una nuova riga per il comando suddetto.</p>
+
+<p><a name="fssupport"></a></p>
+<h3>Estendere il supporto al filesystem</h3>
+<p>La seguente sotto-sessione descrive come estendere il supporto al filesystems. Il riavvio del sistema o di <a href="http://freshports.org/sysutils/dsbmd">DSBMD</a> non sono necessari.</p>
+
+<p><a name="exfat"></a></p>
+<h4>ExFat</h4>
+<p>Sfortunatamente <a href="https://freshports.org/sysutils/fusefs-exfat">sysutils/fusefs-exfat</a> richiede una licenza Microsoft<sup>&reg;</sup>, quindi non può essere preinstallata. Devi costruirla tu stesso usando i ports:</p>
+
+<pre><code># pkg install autoconf automake
+# svnlite co https://svn.freebsd.org/ports/head/Mk /usr/ports/Mk
+# svnlite co https://svn.freebsd.org/ports/head/Templates /usr/ports/Templates
+# svnlite co https://svn.freebsd.org/ports/head/sysutils/fusefs-exfat /tmp/fusefs-exfat
+# cd /tmp/fusefs-exfat
+# make DISTDIR=/tmp install
+</code></pre>
+
+<p>o il <a href="https://github.com/relan/exfat.git">repo Git</a>:</p>
+
+<pre><code># pkg install autoconf automake
+# git clone https://github.com/relan/exfat.git
+# cd exfat
+# autoreconf --install
+# ./configure
+# make &amp;&amp; make install
+</code></pre>
+
+<p><a name="linuxfs"></a></p>
+<h4>BTRFS e XFS</h4>
+<p>Installa il pacchetto <a href="https://www.freshports.org/sysutils/fusefs-lkl">fusefs-lkl</a> per il supporto a BTRFS e XFS.</p>
+
+<pre><code># pkg install fusefs-lkl</code></pre>
+
+<p><a name="networking"></a></p>
+<h2>Connessioni</h2>
+
+<p><a name="wifi"></a></p>
+<h3>Connessione Wireless</h3>
+<p>Il programma <a href="http://freshports.org/net-mgmt/networkmgr">networkmgr</a>, che si trova nel pannello superiore, permette di connetterti alla rete wireless.</p>
+
+<p><a name="instpkg"></a></p>
+<h2>Installare pacchetti software</h2>
+<p>Puoi installare e aggiornare i pacchetti software con <a href="https://www.freshports.org/ports-mgmt/octopkg">OctoPkg</a> (<a href="#overview">Menù Openbox</a> &rarr; <em>System</em> &rarr; <em>OctoPkg</em>) che è un'interfaccia grafica a <a href="https://www.freebsd.org/doc/handbook/pkgng-intro.html">pkg</a> di FreeBSD.</p>
+
+<p><a name="linuxbrowser"></a></p>
+<h2>Installare browser Linux<sup>&reg;</sup> per vedere <em>Netflix</em>, <em>Prime Video</em>, etc.</h2>
+<p>Il programma <em>lbi-gui</em> (<a href="#overview">Menù Openbox</a> → <em>Network</em> → <em>Linux Browser Installer GUI</em>) ti permette di installare <a href="https://en.wikipedia.org/wiki/Widevine"><em>Widevine</em></a> un versione Linux compatibile dei browser <a href="https://www.chromium.org/Home">Chromium</a> e <a href="https://brave.com/">Brave</a>.</p>
+
+<p><a name="graphics"></a></p>
+<h2>Schermo</h2>
+
+<p><a name="multihead"></a></p>
+<h3>Configurazione multischermo</h3>
+<p>Per definizione, NomadBSD abilita tutti gli output connessi (monitors). Lo strumento <a href="http://freshports.org/x11/arandr">ArandR</a> (<a href="#overview">Menù Openbox</a> &rarr; <em>Settings</em> → <em>ArandR</em>) ti permette di configurare la posizione, la risoluzione, etc. dei tuoi monitor. Salva i tuoi cambiamenti su <code>~/.screenlayout/default.sh</code> che è automaticamente eseguito all'avvio di sessione.</p>
+
+<p><a name="displaysettings"></a></p>
+<h3>Cambiare le configurazioni del display</h3>
+<p>Il programma (<a href="#overview">Menù Openbox</a> &rarr; <em>Settings</em> &rarr; <em>Display Settings</em>) ti permette di cambiare la luminosità, la gamma dei colori, la modalità schermo, la gestione energetica del display (DPMS), etc.</p>
+
+<p><img src="images/dsbdisplaysettings-screenshot.png" alt="" /></p>
+
+<p><a name="sound"></a></p>
+<h2>Audio</h2>
+<p><a name="defaultaudio"></a></p>
+
+<h3>Selezionare il dispositivo audio predefinito</h3>
+<p>Clicca con il destro sull'icona dell'indicatore speaker/volume posto sul pannello superiore e scegli <em>Preferences</em> dal menù. Nella finestra delle preferenze vai sulla scheda <em>Default device</em>, seleziona la scheda/dispositivo audio e clicca su <em>Ok</em>. Per rendere effettiva la scelta, assicurati di riavviare le tue applicazioni audio.</p>
+
+<p><a name="altwm"></a></p>
+<h2>Usare un gestore finestre alternativo</h2>
+<p>Puoi installare diversi gestori di finestre e ambienti desktop su NomadBSD. Seleziona quello che vuoi avviare premendo il tasto <code>&lt;F1&gt;</code> nel gestore grafico del login (<a href="https://freshports.org/x11/slim">SLiM</a>).</p>
+
+<p><a name="advanced"></a></p>
+<h2>Argomenti avanzati</h2>
+
+<p><a name="reset"></a></p>
+<h3>Ripristino di NomadBSD</h3>
+<p>Se sei un tester, o se i tuoi esperimenti con il sistema sono andati male, potresti dover resettare NomadBSD.</p>
+<hr />
+<p><strong>Attenzione:</strong> Il reset cancellerà <code>/home</code>, <code>/private</code>, <code>/etc</code>, <code>/var</code>, <code>/root</code> e <code>/usr.local.etc</code>. Fai un backup se in essi ci sono dei files che vuoi conservare.</p>
+<hr />
+
+<p>Puoi ripristinare NomadBSD come segue:</p>
+<ol>
+<li>Avvia in single-user mode (ri)avviando e scegliendo <code>2</code> nel menù di boot.</li>
+<li>Esegui <code>/usr/libexec/nomadbsd-reset</code></li>
+</ol>
+
+<p>Dopo il reboot dovrai nuovamente effettuare la configurazione.</p>
+
+<p><a name="reset_limits"></a></p>
+<h4>Limitazioni</h4>
+<p>Se hai modificato o cancellato file di sistema dall'albero delle directory, oltre a <code>/home</code>, <code>/private</code>, <code>/etc</code>, <code>/var</code>, <code>/root</code>, <code>/tmp</code> e <code>/usr.local.etc</code>, potresti non essere in grado di ripristinare NomadBSD.</p>
+
+<p><a name="disableinitgfx"></a></p>
+<h3>Disabilitare la configurazione automatica dei driver grafici</h3>
+<p>Se vuoi creare la tua personale configurazione dei driver grafici, puoi disabilitare <code>initgfx</code> aggiungendo</p>
+<p><code>initgfx_enable=&quot;NO&quot;</code> a <code>/etc/rc.conf</code>.</p>
+
+<p><a name="hddinstall"></a></p>
+<h3>Installare NomadBSD su hard disk</h3>
+<p>Apri il <a href="#overview">Menù di Openbox</a> &rarr; <em>System</em> &rarr; <em>NomadBSD Installer</em> e segui le istruzioni.</p>
+
+<hr />
+
+<p><strong>Nota:</strong> L'installatore di NomadBSD userà l'intero disco. Installare su una specifica partizione non è attualmente possibile.</p>
+
+<hr />
+
+<p><img src="images/installer-screenshot.png" alt="" /></p>
+
+<p><a name="vbox"></a></p>
+<h3>Avviare NomadBSD in Virtualbox<sup>&trade;</sup></h3>
+
+<ol>
+<li><p><a href="http://nomadbsd.org/download.html">Scarica ed estrai</a> una immagine che intendi avviare.</p></li>
+<li><p>Crea un hard disk virtuale (VDI) dall'immagine:</p>
+
+<pre><code>VBoxManage convertfromraw nomadbsd-x.y.z.img \
+	nomadbsd-x.y.z.vdi --format VDI
+</code></pre></li>
+<li><p>Cambia la dimensione dell'hard disk virtuale, in modo da avere abbastanza spazio per archiviare i file ed installare i pacchetti. Il sistema base di NomadBSD richiede circa 4 GB,
+quindi ridimensiona il VDI a 8 GB (8000 MB), che è la dimensione minima raccomandata, così da avere circa 4 GB per i tuoi files.</p>
+
+<pre><code>VBoxManage modifyhd nomadbsd-x.y.z.vdi --resize 8000</code></pre>
+
+<hr />
+
+<p><strong>Nota</strong>: Aumentare la dimensione di VDI dopo l'avvio del setup di NomadBSD non avrà alcun effetto sulla capacità del filesystem di NomadBSD.</p>
+
+<hr /></li>
+<li><p>Avvia VirtualBox<sup>&trade;</sup> e crea una nuova macchina virtuale. Seleziona <em>Use an existing virtual hard disk file</em> nella configurazione dell'<em>Hard disk</em> e scegli <em>nomadbsd-x.y.z.vdi</em> creato al passo 2.
+<img src="images/create-vbox-machine.png" alt="" /></p></li>
+<li><p>Vai a <em>Settings</em> &rarr; <em>Display</em> e imposta la memoria video a 128MB o più.</p></li>
+<li><p>Vai a <em>Settings</em> &rarr; <em>System</em> &rarr; <em>Processor</em> e imposta il numero di processori a 2.</p></li>
+</ol>
+
+<p><a name="linuxpkg"></a></p>
+<h2>Installare pacchetti Linux<sup>&reg;</sup></h2>
+<p>Prima che tu possa installare pacchetti Linux<sup>&reg;</sup> è necessario abilitare la <a href="https://www.freebsd.org/doc/handbook/linuxemu-lbc-install.html">compatibilità dei binari Linux<sup>&reg;</sup></a>. 
+Supponendo tu voglia installare <a href="https://freshports.org/editors/linux-sublime">linux-sublime</a> puoi procedere come segue:</p>
+
+<pre><code># sysrc linux_enable=YES
+# service abi start
+# pkg install linux-sublime
+</code></pre>
+
+<p><a name="troubleshooting"></a></p>
+<h2>Soluzione di problemi</h2>
+
+<p><a name="errata"></a></p>
+<h3>Errata</h3>
+<p>Se riscontri dei problemi, consulta prima <a href="http://nomadbsd.org/errata-130R-20210508.html">NomadBSD Errata</a>.</p>
+
+<p><a name="ts_boot"></a></p>
+<h3>Problemi di avvio</h3>
+
+<p><a name="ts_mountroot"></a></p>
+<h4>Il processo di avvio si ferma al prompt <em>mountroot</em></h4>
+<p>If you are using a USB 3.X port, try to use a USB 2.X port instead.
+
+<a name="ts_graphics"></a></p>
+<h3>Schede grafiche</h3>
+
+<p><a name="ts_gfxdetect_crash"></a></p>
+<h4>Il riconoscimento automatico della scheda grafica fa collassare il sistema</h4>
+<p>Se il riconoscimento della scheda grafica fa collassare il sistema, puoi usare un driver non-accelerato (VESA o SCFB) disabilitando il riconoscimento al menù di boot. Premi <code>g</code> o <code>7</code> per attivarlo.</p>
+
+<p><a name="ts_ati_amd"></a></p>
+<h4>ATI/AMD</h4>
+<p>Se stai avviando un sistema con schede ATI/AMD via UEFI, potresti sperimentare alcuni problemi. A causa di <a href="https://wiki.freebsd.org/Graphics#AMD_Graphics">un conflitto con il framebuffer EFI</a>, NomadBSD potrebbe collassare o bloccarsi quando il driver viene caricato, o potrebbe solamente essere incapace di avviare X window system.</p>
+
+<p>Prova il seguente rimedio:</p>
+
+<ol>
+<li>(Ri)avvia e nel sotto-menù di boot, premi il tasto <code>Boot Options</code> (<code>6</code>).</li>
+<li>Cambia <code>Disable syscons</code> a <code>On</code> premendo il tasto corrispondente al numero dell'elemento.</li>
+<li>Torna al menù principale e premi <code>&lt;Enter&gt;</code> per avviare.</li>
+</ol>
+
+<hr />
+
+<p><strong>Nota:</strong> Non vedrai alcun messaggio di boot fino a che il driver grafico non sia caricato.</p>
+
+<hr />
+
+<p><a name="ts_nvidia"></a></p>
+<h4>NVIDIA</h4>
+<p>Se vedi un messaggio di errore come <code>device_attach: nvidia0 attach returned 6</code> dovresti provare ad aggiungere <code>debug.acpi.disabled=&quot;sysres&quot;</code> a <code>/boot/loader.conf</code>.</p>
+
+<p><a name="efifb"></a></p>
+<h4>Framebuffer EFI dello schermo schiacciato/distorto</h4>
+<p>Se ti è capitato di vedere che il contenuto dello schermo sembra essere <em>schiacciato</em> al 1/3 superiore del monitor puoi provare quanto segue:</p>
+
+<ol>
+<li>Riavvia e inserisci il prompt di caricamento premendo il tasto 3 del menù di boot.</li>
+<li>Digita:
+<pre>
+gop set 0
+boot
+</pre></li>
+</ol>
+
+<p>Se ciò non risolve il problema, entra nel prompt di caricamnento come descritto dianzi e digita <code>list gop</code> per vedere un elenco dei modi supportati. In base all'elenco prova un altro numero di modalità per il comando <code>gop set</code> in 2). Se trovi un modo che risolve il problema, puoi salvare tale configurazione aggiungendo la riga
+<code>exec=&quot;gop set X&quot;</code> a <code>/boot/loader.conf</code>, dove <code>X</code> è il numero della modalità.</p>
+
+<p>Un altro modo per risolvere questo problema è di avviare il sistema in modalità legacy. Consulta il tuo manuale EFI/BIOS.</p>
+
+<p><a name="hybridgfx"></a></p>
+<h4>Schede grafiche ibride Combination/Switchable</h4>
+<p>NomadBSD non supporta ancora schede commutabili come <em>Optimus</em>. Se il server Xorg fallisce l'avvio, disabilita una delle GPU nel tuo BIOS/UEFI di sistema.</p>
+
+
+
+
+</body>
+</html>
